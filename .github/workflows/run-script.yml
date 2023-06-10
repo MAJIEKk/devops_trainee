@@ -1,0 +1,23 @@
+name: Run Script
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Switch to main branch
+        run: git checkout main
+
+      - name: Merge changes from production
+        run: git merge --no-ff production
+
+      - name: Push changes to main branch
+        run: git push origin main
